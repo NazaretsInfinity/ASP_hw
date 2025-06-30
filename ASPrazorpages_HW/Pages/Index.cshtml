@@ -1,0 +1,19 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-2">Welcome!</h1>
+    <h1 class="display-6">Current Time: @DateTime.Now.ToString("HH:mm")</h1>
+   
+</div>
+<hr>
+<h3>
+    Дата: @DateTime.Now.ToString("dd.MM.yy")<br>
+    Время: @DateTime.Now.ToString("HH:mm:ss")<br>
+    День: @DateTime.Now.DayOfYear<br>
+    @Model.DayOfWeek<br>
+</h3>
+<p>Random number: @Model.RandomNumber</p>
