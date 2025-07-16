@@ -6,15 +6,19 @@ namespace ASPrazorpages_HW.Pages
 {
     public class IndexModel : PageModel
     {
-        public string? DayOfWeek { get; set; }
         public int? RandomNumber {  get; set; }
 
         public void OnGet()
         {
+            #region turned into TimeService
             CultureInfo culture = CultureInfo.GetCultureInfo("ru-RU");
-            DayOfWeek = culture.DateTimeFormat.GetDayName(DateTime.Now.DayOfWeek);
+            //CultureInfo.CurrentCulture - get culture applied to our PC 
 
-            RandomNumber = new Random().Next();
+            //DayOfWeek = culture.DateTimeFormat.GetDayName(DateTime.Now.DayOfWeek);
+
+            //char.ToUpper(); //turns char into up register
+            RandomNumber = new Random().Next(); 
+            #endregion
         }
     }
 }

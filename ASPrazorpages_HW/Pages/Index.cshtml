@@ -1,9 +1,10 @@
 ﻿@page
+@using ASPrazorpages.Services
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
-
+@inject ITimeService timeService
 <div class="text-center">
     <h1 class="display-2">Welcome!</h1>
     <h1 class="display-6">Current Time: @DateTime.Now.ToString("HH:mm")</h1>
@@ -14,6 +15,7 @@
     Дата: @DateTime.Now.ToString("dd.MM.yy")<br>
     Время: @DateTime.Now.ToString("HH:mm:ss")<br>
     День: @DateTime.Now.DayOfYear<br>
-    @Model.DayOfWeek<br>
+    @timeService.GetDayOfWeek();
+    <br>
 </h3>
 <p>Random number: @Model.RandomNumber</p>

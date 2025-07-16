@@ -1,3 +1,6 @@
+using ASPrazorpages.Services;
+using ASPrazorpages.Services.Implementations;
+
 namespace ASPrazorpages_HW
 {
     public class Program
@@ -8,6 +11,9 @@ namespace ASPrazorpages_HW
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+
+            builder.Services.AddScoped<ITimeService,TimeService>(); //regisyering service 
+            builder.Services.AddScoped<IStringService,StringService>();
 
             var app = builder.Build();
 
