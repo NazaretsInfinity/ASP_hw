@@ -1,5 +1,8 @@
 using ASPrazorpages.Services;
 using ASPrazorpages.Services.Implementations;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace ASPrazorpages_HW
 {
@@ -12,8 +15,50 @@ namespace ASPrazorpages_HW
             // Add services to the container.
             builder.Services.AddRazorPages();
 
-            builder.Services.AddScoped<ITimeService,TimeService>(); //regisyering service 
-            builder.Services.AddScoped<IStringService,StringService>();
+
+            #region Services autoregistration with Microsoft DI
+            // var assembler = typeof(Program).Assembly;
+            // //type - de name of class
+
+            //IEnumerable<Type> serviceTypes = assembler.GetTypes()
+            // .Where(type => type.IsClass && !type.IsAbstract && type.Name.EndsWith("Service"));
+
+            // foreach(Type serviceType in  serviceTypes)
+            // {
+            //     Type? interfaceType = serviceType.GetInterface($"I{serviceType.Name}");
+
+            //     if (interfaceType == null) continue;
+
+            //     builder.Services.AddScoped(interfaceType, serviceType);
+            // }
+            #endregion
+
+            #region Service registration with Autofac 
+            builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory()); // we designates we're gonna use other packet instead of Mic DI 
+
+            builder.Host.ConfigureContainer<ContainerBuilder>(ContainerBuilder =>
+            {
+                //ContainerBuilder.RegisterType<TimeService>()
+                //                .As<ITimeService>();
+
+                //ContainerBuilder.RegisterType<StringService>()
+                //                .As<IStringService>();      
+
+
+                Assembly assembler = typeof(Program).Assembly;
+
+                ContainerBuilder.RegisterAssemblyTypes(assembler)
+                                .Where(type => type.Name.EndsWith("Service"))
+                                .AsImplementedInterfaces()
+                                .InstancePerLifetimeScope();
+            });
+            #endregion
+
+            #region adding services manually
+            //builder.Services.AddScoped<ITimeService,TimeService>(); //regisyering service 
+            //builder.Services.AddScoped<IStringService,StringService>();
+            #endregion
+
 
             var app = builder.Build();
 
