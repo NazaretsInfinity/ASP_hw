@@ -1,0 +1,166 @@
+﻿@page
+@* @page Means this file is A PAGE*@
+@model ASPrazorpages.Pages.FeaturesModel
+
+<p>
+	@@User name  @*symbol @ will be showed. Escape symbol*@
+
+	But example@mail.ru , cause it fits in address sample <br />
+	@DateTime.IsLeapYear(DateTime.Now.Year) <br />
+
+	@DateTime.Now.Year - 1 <br />
+	@*each whitespace is considered as an end of razor expression*@
+
+	@await Model.GetMessageAsync() <br />
+	@*await here is an exception for whitespace*@
+
+	@* @(DateTime.Now) - implicit expression
+		@Datetime.Now - explicit expression
+
+		все вычисления лучше обособлять скобками 
+	*@
+
+	@(DateTime.Now - TimeSpan.FromDays(5))
+
+	@("<h1>Hello, snort/<h1>")
+
+	<br/>
+
+	@Html.Raw("<h1>Hello, snort/<h1>")
+
+	<!--CODE block----------------------------->
+	@{
+		string name = "John";
+	}
+
+	<p>this is @name</p>
+
+	<br/>
+	@{
+		// local method - method, that has no access modificator, doesn't belong to any class
+		//can or can't return value
+		void DisplayName(string name)
+		{
+			<p> Name: <b>@name</b></p>
+		}
+
+		DisplayName("Bob");
+	}
+
+	<br />
+	@{
+		int randNum = new Random().Next();
+		<p> Number @randNum</p>
+	}
+
+	<br />
+	@{
+		string[] names = { "Bob", "Tom", "Alex" };
+
+		for (int i =0; i <names.Length; ++i)
+		{
+			name = names[i]; // 's been declared before
+			<p>@name></p>
+
+			<text>Name: @name</text> // <text> is a tag specially for the block of code
+			//when we want input text into bloc, but also we want it to output on the page
+			//without using tags
+
+			// tho there is also this way
+			@:Name @name <br> 
+		}
+
+		<br />
+		<div class="@false">Div is false</div>
+		<div class="@null">Div is null in class</div>
+		<div class="">Div with empty class</div>
+
+		<div class="@("")">Same empty class as upper(class = "")</div>
+
+
+		<input type="checkbox" checked="@true"/>
+		<input type="checkbox" checked="@false"/>
+		<input type="checkbox" checked="@null"/>
+
+		<div data-id ="@null" data-active = "@null"> </div>
+	}
+
+	@{
+		int number = new Random().Next();
+	}
+
+	<!--Loops and constructions-->
+	@if(number %2 ==0)
+	{
+		<p>Number @number is even!</p>
+	}
+	else
+	{
+		<p>Number @number is odd!</p>
+	}
+
+	<br />
+
+	@{
+		number =1;
+	}
+	@switch(number)
+	{
+		case 1:
+			<p>Number is 1</p>break;
+		case 2:
+			<p>Number is 2</p>
+			break;
+		default:
+			<p>Number is neither 1 or 2</p>break;
+	}
+
+	<br />
+	<ol>
+		@for(int i = 0; i < names.Length; ++i)
+		{
+			<li>@names[i]</li>
+		}
+	</ol>
+
+	<ol>
+		@{
+			int j = names.Length - 1;
+			//we already declared var 'i' , so it's j (we declared 'i' in the loop and it does count here)
+		}
+		@while (j >=0)
+		{
+			<li>@names[j]</li>
+			--j;
+
+		}
+	</ol>
+
+	<!--Ways to comment-->
+	@{
+		//Inline comment
+		/*Multiline comment */
+	}
+	<!--HTML comment. Can write anywhere, it will display in the view code-->
+	@*razor comment. isn't included in the view, unlike HTML comment*@
+
+	<!--FUNCTION block-->
+	@functions{
+		class Person
+		{
+			public required string FirstName { get; set; }
+			public required string LastName { get; set; }
+		}
+	}
+
+@{
+		Person person = new Person()
+			{
+				FirstName = "Tom",
+				LastName = "Simple"
+			};
+	}
+
+
+
+

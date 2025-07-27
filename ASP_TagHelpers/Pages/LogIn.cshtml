@@ -1,0 +1,23 @@
+﻿@page
+@model ASP_TagHelpers.Pages.LogInModel
+
+@if(Model.Message != null)
+{
+	<p class="alert alert-success">
+		@Model.Message
+	</p>
+}
+<form method="POST">
+	<div class="mb-3">
+		<label class="form-label" for="email">Email address:</label>
+		<input type="email" class="form-control" name="email" placeholder="name@example.com">
+		<span class="text-danger" asp-validation-for="Email"></span>
+	</div>
+	<div class="mb-3">
+		<label for="password" class="form-label">Password:</label>
+		<input class="form-control" name="password" type="password">
+		<span class="text-danger" asp-validation-for="Password"></span>
+	</div>
+
+	<button class="btn btn-primary" >send</button>
+</form>
