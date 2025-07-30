@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPrazorpages", "ASPrazorpa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP_TagHelpers", "ASP_TagHelpers\ASP_TagHelpers.csproj", "{E82D4DC7-E04C-428D-A650-E7D4CADE9D77}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP_TaskManager", "ASP_TaskManager\ASP_TaskManager.csproj", "{AF450360-1C7B-4A74-B925-0A69471F0804}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E82D4DC7-E04C-428D-A650-E7D4CADE9D77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E82D4DC7-E04C-428D-A650-E7D4CADE9D77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E82D4DC7-E04C-428D-A650-E7D4CADE9D77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF450360-1C7B-4A74-B925-0A69471F0804}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF450360-1C7B-4A74-B925-0A69471F0804}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF450360-1C7B-4A74-B925-0A69471F0804}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF450360-1C7B-4A74-B925-0A69471F0804}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

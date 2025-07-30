@@ -1,0 +1,13 @@
+﻿@page
+@model IndexModel
+
+@inject ITaskService taskService
+
+
+@foreach(TaskItem task in taskService.GetAllTasks())
+{
+	<div class="p-2 mb-3 border border-warning">
+		<p class="mb-0">@task.Title</p>
+		<p class="text-muted">@(task.Description ?? "No description")</p>
+	</div>
+}
