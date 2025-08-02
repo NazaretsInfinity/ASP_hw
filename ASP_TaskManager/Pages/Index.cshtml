@@ -24,11 +24,13 @@
 
 @foreach(TaskItem task in taskService.GetAllTasks())
 {
+	string icon = task.IsCompleted ? "bi bi-check2-square text-success" : "bi bi-x-square text-danger";
+
 	<div class="card mb-3">
 		<div class="card-header">
 			<i class="bi bi-clock"></i>
 			<span>Created at: @task.CreatedAt.ToString("dd/mm/yy hh:mm")</span>
-			<i class="bi bi-x text-danger"></i>
+			<i class="@icon"></i>
 		</div>
 		<div class="card-body">
 			<p class="card-title fs-5">@task.Title</p>
