@@ -5,5 +5,7 @@ namespace ASP_TaskManager.Services
     public interface ITaskService
     {
         List<TaskItem> GetAllTasks();
+        void CreateTask(string title,string? description);
+        void ChangeTaskState(int id);
     }
 }

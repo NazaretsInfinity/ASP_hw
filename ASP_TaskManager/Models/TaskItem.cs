@@ -2,6 +2,9 @@
 {
     public class TaskItem
     {
+        public int Id { get; set; }
+
+        public bool IsCompleted { get; set; } = false;
         public required string Title { get; set; }
         public string? Description { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;

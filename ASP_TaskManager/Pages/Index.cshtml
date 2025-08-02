@@ -4,16 +4,45 @@
 @inject ITaskService taskService
 
 
+<form method="POST">
+	<div class="mb-2">
+		<label class="form-label" asp-for="Title">Name:</label>
+		<input class="form-control" asp-for="Title" />
+		<span class="text-danger" asp-validation-for="Title"></span>
+	</div>
+
+	<div class="mb-2">
+		<label class="form-label" asp-format="Description">Description:</label>
+		<textarea class="form-control" asp-for="Description"></textarea>
+	</div>
+
+	<div class="mb-2">
+		<button class="btn btn-warning"><b>Create</b></button>
+	</div>
+</form>
+
+
 @foreach(TaskItem task in taskService.GetAllTasks())
 {
 	<div class="card mb-3">
 		<div class="card-header">
 			<i class="bi bi-clock"></i>
 			<span>Created at: @task.CreatedAt.ToString("dd/mm/yy hh:mm")</span>
+			<i class="bi bi-x text-danger"></i>
 		</div>
 		<div class="card-body">
 			<p class="card-title fs-5">@task.Title</p>
 			<p class="card-text text-muted">@(task.Description ?? "No description")</p>
+		</div>
+		<div class="card-footer">
+			@if(task.IsCompleted)
+			{
+				<a class="btn btn-secondary" asp-page-handler="ChangeTaskState" asp-route-id="@task.Id">undone</a>
+			}
+			else
+			{
+				<a class="btn btn-success" asp-page-handler="ChangeTaskState" asp-route-id="@task.Id">done!</a>
+			}
 		</div>
 	</div>
 }
