@@ -13,6 +13,12 @@ namespace ASP_TaskManager.Services.Implementations
             _taskId = 1;
         }
         public List<TaskItem> GetAllTasks() => _tasks;
+        public TaskItem? GetTaskById(int id)
+        {
+            foreach (var task in _tasks)
+                if (task.Id == id)return task;
+            return null;
+        }
 
         public void CreateTask(string title,string? description)
         {
@@ -27,10 +33,16 @@ namespace ASP_TaskManager.Services.Implementations
 
         public void ChangeTaskState(int id)
         {
-            foreach (var task in _tasks) 
-                if (task.Id == id)
+            TaskItem? task = GetTaskById(id) ?? throw new Exception(); //specify it later 
+            task.IsCompleted = !task.IsCompleted;
+        }
+
+        public void DeleteTask(int id)
+        {
+            for (int i = 0; i < _tasks.Count; ++i)
+                if (_tasks[i].Id == id)
                 {
-                    task.IsCompleted = !task.IsCompleted;
+                    _tasks.RemoveAt(i);
                     break;
                 }
         }

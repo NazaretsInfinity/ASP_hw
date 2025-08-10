@@ -39,12 +39,25 @@
 		<div class="card-footer">
 			@if(task.IsCompleted)
 			{
-				<a class="btn btn-secondary" asp-page-handler="ChangeTaskState" asp-route-id="@task.Id">undone</a>
+				<a class="btn btn-secondary" asp-page-handler="ChangeTaskState" asp-route-id="@task.Id">
+					undone
+				</a>
 			}
 			else
 			{
-				<a class="btn btn-success" asp-page-handler="ChangeTaskState" asp-route-id="@task.Id">done!</a>
+				<a class="btn btn-success" asp-page-handler="ChangeTaskState" asp-route-id="@task.Id">
+					<i class="bi bi-check2"></i>
+					done
+				</a>
 			}
+			<a class="btn btn-primary" asp-page="/EditTask" asp-route-id="@task.Id">
+				<i class="bi bi-pen"></i>
+				edit
+			</a>
+			<a class="btn btn-danger" asp-page-handler="DeleteTask" asp-route-id="@task.Id">
+				<i class="bi bi-trash"></i>
+				delete
+			</a>
 		</div>
 	</div>
 }

@@ -1,0 +1,29 @@
+﻿@page
+@model ASP_TaskManager.Pages.EditTaskModel
+<h1 class="text-warning border-bottom">Edit Task</h1>
+
+<form method="POST">
+<div class="mb-3">
+	<label class="form-label" asp-for="Title">Title:</label>
+	<input class="form-control" asp-for="Title"/>
+</div>
+<div class="mb-3">
+	<label class="form-label" asp-for="Description">Description:</label>
+	<textarea class="form-control" asp-for="Description"></textarea>
+</div>
+<div class="mb-3 form-check">
+	<input class="form-check-input" asp-for="IsCompleted"/>
+	<label class="form-check-label" asp-for="IsCompleted">Completed</label>
+</div>
+<div class="mb-3">
+	<label class="form-label" asp-for="CreatedAt">Created at:</label>
+	<input class="form-control" asp-for="CreatedAt" />
+</div>
+
+<div>
+	<button type="submit" class="btn btn-warning">
+		<i class="bi bi-upload"></i>
+		submit
+	</button>
+</div>
+</form>

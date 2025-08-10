@@ -31,5 +31,11 @@ namespace ASP_TaskManager.Pages
             _taskService.ChangeTaskState(id);
             return RedirectToPage("/Index");
         }
+
+        public IActionResult OnGetDeleteTask(int id)
+        {
+            _taskService.DeleteTask(id);
+            return RedirectToPage("/Index");
+        }
     }
 }
