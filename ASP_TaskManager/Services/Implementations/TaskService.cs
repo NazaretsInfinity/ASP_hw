@@ -1,24 +1,25 @@
 ﻿using ASP_TaskManager.Models;
+using ASP_TaskManager.Repositories;
+using System.Threading.Tasks;
 
 namespace ASP_TaskManager.Services.Implementations
 {
     public class TaskService : ITaskService
     {
-        private readonly List<TaskItem> _tasks;
-        private int _taskId;
+        private readonly ITaskRepository _taskRepository;
+        int _taskId;
 
-        public TaskService()
+        public TaskService(ITaskRepository taskRepository)
         {
-            _tasks = new List<TaskItem>();
-            _taskId = 1;
+            _taskRepository = taskRepository;
+
+            int nextId = 0;
+            foreach (var task in _taskRepository.GetAll())
+                if (task.Id > nextId) nextId = task.Id;
+            _taskId = nextId;
         }
-        public List<TaskItem> GetAllTasks() => _tasks;
-        public TaskItem? GetTaskById(int id)
-        {
-            foreach (var task in _tasks)
-                if (task.Id == id)return task;
-            return null;
-        }
+        public List<TaskItem> GetAllTasks() => _taskRepository.GetAll();
+        public TaskItem? GetTaskById(int id) => _taskRepository.GetById(id);
 
         public void CreateTask(string title,string? description)
         {
@@ -28,7 +29,7 @@ namespace ASP_TaskManager.Services.Implementations
                 Description = description,
                 Id = _taskId++
             };
-            _tasks.Add(task);
+            _taskRepository.Create(task);
         }
 
         public void ChangeTaskState(int id)
@@ -37,14 +38,6 @@ namespace ASP_TaskManager.Services.Implementations
             task.IsCompleted = !task.IsCompleted;
         }
 
-        public void DeleteTask(int id)
-        {
-            for (int i = 0; i < _tasks.Count; ++i)
-                if (_tasks[i].Id == id)
-                {
-                    _tasks.RemoveAt(i);
-                    break;
-                }
-        }
+        public void DeleteTask(int id) => _taskRepository.Delete(id);
     }
 }

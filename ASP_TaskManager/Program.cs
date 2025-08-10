@@ -1,3 +1,5 @@
+using ASP_TaskManager.Repositories;
+using ASP_TaskManager.Repositories.Implementations;
 using ASP_TaskManager.Services;
 using ASP_TaskManager.Services.Implementations;
 
@@ -9,7 +11,8 @@ namespace ASP_TaskManager
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddSingleton<ITaskService, TaskService>();
+            builder.Services.AddScoped<ITaskService, TaskService>();
+            builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 
             // Add services to the container.
             builder.Services.AddRazorPages();

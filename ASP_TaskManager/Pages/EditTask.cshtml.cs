@@ -4,15 +4,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
+using ASP_TaskManager.Repositories;
 
 namespace ASP_TaskManager.Pages
 {
     public class EditTaskModel : PageModel
     {
         public ITaskService _taskService { get; set; }
-        public EditTaskModel(ITaskService taskService)
+        public ITaskRepository _taskRepository { get; set; }
+        public EditTaskModel(ITaskService taskService, ITaskRepository taskRepository)
         { 
             _taskService = taskService;
+            _taskRepository = taskRepository;
         }
 
         [BindProperty(Name ="id", SupportsGet =true)]
@@ -43,7 +46,7 @@ namespace ASP_TaskManager.Pages
             task.CreatedAt = CreatedAt;
             task.IsCompleted = IsCompleted;
 
-
+            _taskRepository.SaveChanges();
             return RedirectToPage("/Index");
         }
 
