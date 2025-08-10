@@ -3,6 +3,7 @@ using ASP_TaskManager.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 
 namespace ASP_TaskManager.Pages
 {
@@ -44,6 +45,19 @@ namespace ASP_TaskManager.Pages
 
 
             return RedirectToPage("/Index");
+        }
+
+        public IActionResult OnGet()
+        {
+            TaskItem? task = _taskService.GetTaskById(TaskId);
+            if (task is null)
+                return RedirectToPage("/Index");
+
+            Title = task.Title;
+            Description = task.Description;
+            IsCompleted = task.IsCompleted;
+            CreatedAt = task.CreatedAt;
+            return Page();
         }
     }
 }
